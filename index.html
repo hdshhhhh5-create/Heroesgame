@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Герои: Хроники Эмодзи</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            touch-action: manipulation;
+        }
+        #game-wrapper {
+            position: relative;
+            width: 480px;
+            height: 640px;
+        }
+        canvas {
+            border: 3px solid #444;
+            border-radius: 4px;
+            image-rendering: pixelated;
+            display: block;
+        }
+        #ui-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.8);
+            border-top: 2px solid #555;
+        }
+        #status {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 8px;
+            color: #ffd700;
+            font-size: 12px;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 16px; font-weight: bold; }
+        #controls {
+            display: grid;
+            grid-template-columns: 50px 50px 50px;
+            grid-template-rows: 50px 50px 50px;
+            gap: 4px;
+            justify-content: center;
+        }
+        #controls button {
+            width: 50px; height: 50px; font-size: 20px;
+            background: #222; color: #ccc;
+            border: 2px solid #444; border-radius: 6px;
+            cursor: pointer; user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #controls button:active { background: #444; border-color: #888; }
+        .up { grid-column: 2; grid-row: 1; }
+        .left { grid-column: 1; grid-row: 2; }
+        .center { grid-column: 2; grid-row: 2; font-size: 12px !important; }
+        .right { grid-column: 3; grid-row: 2; }
+        .down { grid-column: 2; grid-row: 3; }
+        #message {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-size: 16px; font-weight: bold;
+            text-shadow: 2px 2px 0 #000;
+            pointer-events: none; z-index: 10;
+            text-align: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        #message.show { opacity: 1; }
+    </style>
+</head>
+<body>
+<div id="game-wrapper">
+    <canvas id="game" width="480" height="480"></canvas>
+    <div id="message"></div>
+    <div id="ui-layer">
+        <div id="status">
+            <div class="stat">Ур.<br><span class="stat-value" id="lvl">1</span></div>
+            <div class="stat">💰<br><span class="stat-value" id="gold">0</span></div>
+            <div class="stat">❤️<br><span class="stat-value" id="hp">100</span></div>
+            <div class="stat">⚔️<br><span class="stat-value" id="kills">0</span></div>
+            <div class="stat">⭐<br><span class="stat-value" id="exp">0</span></div>
+        </div>
+        <div id="controls">
+            <button class="up">▲</button>
+            <button class="left">◄</button>
+            <button class="center">A</button>
+            <button class="right">►</button>
+            <button class="down">▼</button>
+        </div>
+    </div>
+</div>
+
+<script src="sprites.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
